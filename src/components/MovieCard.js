@@ -1,8 +1,8 @@
-import { Card, Modal, Button } from 'react-bootstrap';
+import { Card, Modal, Button, Table } from 'react-bootstrap';
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-export default function MovieCard({ productProp, isAdmin }) {
+export default function MovieCard({ productProp}) {
   const { title, director, year, description, genre, comments } = productProp;
 
   const [showModal, setShowModal] = useState(false);
@@ -12,19 +12,18 @@ export default function MovieCard({ productProp, isAdmin }) {
 
   return (
     <>
-      <Card style={{ minWidth: '20rem', minHeight: '25rem' }} className='mb-2 text-center'>
-        <Card.Img variant="top" src={`https://picsum.photos/200/300?random=${title}`} style={{ width:'30%', height: 'auto'}} className="mx-auto" />
-        <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-          <Card.Title className='text-center'>{title}</Card.Title>
-          {isAdmin ? (
-            comments.map((comment, index) => (
-              <Card.Text key={index} className='text-center'>
-                <strong>User {comment.userId}:</strong> {comment.text}
-              </Card.Text>
-            ))
-          ) : (
-            <Card.Text className='text-center'>No comments available for non-admin users.</Card.Text>
-          )}
+
+      <Card style={{ minWidth:'20rem', minHeight: '25rem' }} className='mb-2 text-center'>
+        <Card.Body style={{ display: 'flex', flexDirection: 'column', jusitfyContent: 'space-between', height: '100%' }}>
+          <div style={{ flexGrow: 1, dispaly: 'flex', justifyContetn: 'center', alignItems: 'center', minHeight: '200px' }}>
+            <img
+              src={`https://picsum.photos/200/300?random=${title}`}
+              alt={title}
+              className= "img-fluid"
+              style={{ maxWidth: "100%" , maxHeight: "300px", objectFit: '200px'}}
+            />
+          </div>
+          <Card.Title>{title}</Card.Title>
           <Button className='btn btn-info' onClick={handleShow}>Details</Button>
         </Card.Body>
       </Card>
@@ -34,11 +33,30 @@ export default function MovieCard({ productProp, isAdmin }) {
           <Modal.Title>Movie Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>{title}</h1>
-          <h2>{director}</h2>
-          <h3>{year}</h3>
-          <h4>{genre}</h4>
-          <p>{description}</p>
+          <Table striped bordered hover size="sm">
+            <tbody>
+              <tr>
+                <td><strong>Title:</strong></td>
+                <td>{title}</td>
+              </tr>
+              <tr>
+                <td><strong>Director:</strong></td>
+                <td>{director}</td>
+              </tr>
+              <tr>
+                <td><strong>Year:</strong></td>
+                <td>{year}</td>
+              </tr>
+              <tr>
+                <td><strong>Genre:</strong></td>
+                <td>{genre}</td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td>
+                <td>{description}</td>
+              </tr>
+            </tbody>
+          </Table>
         </Modal.Body>
         <Modal.Footer>
           <Button variant='secondary' onClick={handleClose}>

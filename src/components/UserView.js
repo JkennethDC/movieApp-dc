@@ -9,8 +9,8 @@ export default function UserView({ movieData }) {
 
   return (
     <Container>
-      <Row className="justify-content-center">
-        <h2>Movies and Comments</h2>
+      <Row className="justify-content-center text-center m-5">
+        <h2>Movies</h2>
       </Row>
       <Row className="justify-content-center">
         {movieData.map((movie) => (

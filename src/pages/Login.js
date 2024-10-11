@@ -43,10 +43,9 @@ export default function Login() {
             if (data.access) {
                 localStorage.setItem('token', data.access);
                 getUserDeets(data.access)
-                console.log('User state updated:', user);
 
                 notyf.success('Logged in successfully');
-                navigate('/home'); 
+                navigate('/'); 
             } else if (data.error) {
                 notyf.error(data.error);
             } else if (data.message) {
